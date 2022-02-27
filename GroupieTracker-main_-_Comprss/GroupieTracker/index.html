@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Groupie Tracker</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/filter.css">
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script>
+		$(function () {
+			var array = [];
+
+			var elements = document.body.getElementsByTagName("h4");
+
+			for (var i = 0; i < elements.length; i++) {
+				var current = elements[i];
+				//console.log(current, current.children)
+				if (current.children.length === 0 && current.textContent.replace(/ |\n/g, '') !== '') {
+					array.push(current.textContent);
+				}
+			}
+			//console.log(array)
+			$("#search").autocomplete({
+				source: array
+			});
+		});
+	</script>
+	
+	<script>
+		function ouvrirPage() {
+			var array = [];
+
+			var elements = document.body.getElementsByTagName("h4");
+
+			for (var i = 0; i < elements.length; i++) {
+				var current = elements[i];
+				//console.log(current, current.children)
+				if (current.children.length === 0 && current.textContent.replace(/ |\n/g, '') !== '') {
+					array.push(current.textContent);
+				}
+			}
+    		var a = document.getElementById("search").value;
+			if(array.includes(a)){
+				console.log(array.indexOf(a))
+				window.open(`/artist/${array.indexOf(a)}`);
+			}
+			
+		}
+	</script>
+	
+	
+</head>
+
+<body>
+
+	<div class="navbar">
+        <nav>
+            <ul class="links">
+                <li><a href="index.html">Artists</a></li>
+                <li><a href="/assets/pages/members.html">Members</a></li>
+                <li><a href="/assets/pages/about.html">About</a></li>
+            </ul>
+        </nav>
+            <div class="container4">
+                <input type="search" id="search" value="" onchange="ouvrirPage()">
+				<input type="button" id="button" onclick="ouvrirPage()" value="Chercher">
+            </div>
+    </div>
+
+	<div class="main">
+		<div class="container1">
+			<div class="row">
+				
+				{{range .}}
+				{{ $countries := "" }}
+				{{ $cities := "" }}
+				{{range .Countries}}
+				{{$countries = join " " $countries .}}
+				{{end}}
+				{{range .Cities}}
+				{{$cities = join " " $cities .}}
+				{{end}}
+				{{ if eq (len .Members) 1 }}
+
+				<div class="col-md-3">
+					<div class="people artist date {{$countries}}{{$cities}} {{.CreationDate}}">
+						<a class="album-poster">
+							<a href="/artist/{{.Id}}"><img src="{{.Image}}" draggable="false"></a>
+	
+							
+							<h4>{{.Name}}</h4>
+							<p>Since {{.CreationDate}}</p>
+
+						</a>
+					</div>
+				</div>
+				{{ else if gt (len .Members) 1 }}
+
+				<div class="col-md-3">
+					<div class="people group date {{$countries}}{{$cities}} {{.CreationDate}}">
+						<a class="album-poster">
+							<a href="/artist/{{.Id}}"><img src="{{.Image}}" draggable="false"></a>
+						</a>
+						<h4>{{.Name}}</h4>
+						<p>Since {{.CreationDate}}</p>
+					</div>
+				</div>
+				{{ else if gt (len .Members) 1 }}
+				{{ end }}
+				{{ end }}
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container2">
+		<aside>
+			<h3>Artist / Group</h3>
+			<div>
+				<div><input type="checkbox" name="artistGroup" value="artist" id="artist"><label
+						for="artist">Artist</label></div>
+				<div><input type="checkbox" name="artistGroup" value="group" id="group"><label for="group">Group</label>
+				</div>
+			</div>
+
+				<h3>Country</h3>
+				<div>
+					<div><input type="checkbox" name="country" value="usa" id="usa"><label for="usa">United
+							States</label></div>
+					<div><input type="checkbox" name="country" value="japan" id="japan"><label for="japan">Japan</label>
+					</div>
+					<div><input type="checkbox" name="country" value="uk" id="uk"><label for="uk">United Kingdom</label>
+					</div>
+					<div><input type="checkbox" name="country" value="france" id="france"><label
+							for="france">France</label></div>
+					<div><input type="checkbox" name="country" value="slovakia" id="slovakia"><label
+							for="slovakia">Slovakia</label></div>
+					<div><input type="checkbox" name="country" value="hungary" id="hungary"><label
+							for="hungary">Hungary</label></div>
+					<div><input type="checkbox" name="country" value="belarus" id="belarus"><label
+							for="belarus">Belarus</label></div>
+					<div><input type="checkbox" name="country" value="switzerland" id="switzerland"><label
+							for="switzerland">Switzerland</label></div>
+					<div><input type="checkbox" name="country" value="australia" id="australia"><label
+							for="australia">Australia</label></div>
+					<div><input type="checkbox" name="country" value="argentina" id="argentina"><label
+							for="argentina">Argentina</label></div>
+					<div><input type="checkbox" name="country" value="brazil" id="brazil"><label
+							for="brazil">Brazil</label></div>
+					<div><input type="checkbox" name="country" value="spain" id="spain"><label for="spain">Spain</label>
+					</div>
+					<div><input type="checkbox" name="country" value="portugal" id="portugal"><label
+							for="portugal">Portugal</label></div>
+					<div><input type="checkbox" name="country" value="sweden" id="sweden"><label
+							for="sweden">Sweden</label></div>
+					<div><input type="checkbox" name="country" value="belgium" id="belgium"><label
+							for="belgium">Belgium</label></div>
+					<div><input type="checkbox" name="country" value="germany" id="germany"><label
+							for="germany">Germany</label></div>
+					<div><input type="checkbox" name="country" value="new" id="new"><label for="new">New Zealand</label>
+					</div>
+					<div><input type="checkbox" name="country" value="french " id="french "><label for="french ">French
+							Polynesia</label></div>
+					<div><input type="checkbox" name="country" value="czech" id="czech"><label for="czech">Czech
+							Republic</label></div>
+					<div><input type="checkbox" name="country" value="indonesia" id="indonesia"><label
+							for="indonesia">Indonesia</label></div>
+					<div><input type="checkbox" name="country" value="india" id="india"><label for="india">India</label>
+					</div>
+					<div><input type="checkbox" name="country" value="qatar" id="qatar"><label for="qatar">Qatar</label>
+					</div>
+					<div><input type="checkbox" name="country" value="united" id="united"><label for="united">United
+							Arab Emirates</label></div>
+					<div><input type="checkbox" name="country" value="colombia" id="colombia"><label
+							for="colombia">Colombia</label></div>
+					<div><input type="checkbox" name="country" value="austria" id="austria"><label
+							for="austria">Austria</label></div>
+					<div><input type="checkbox" name="country" value="mexico" id="mexico"><label
+							for="mexico">Mexico</label></div>
+					<div><input type="checkbox" name="country" value="china" id="china"><label for="china">China</label>
+					</div>
+					<div><input type="checkbox" name="country" value="norway" id="norway"><label
+							for="norway">Norway</label></div>
+					<div><input type="checkbox" name="country" value="poland" id="poland"><label
+							for="poland">Poland</label></div>
+					<div><input type="checkbox" name="country" value="italy" id="italy"><label for="italy">Italy</label>
+					</div>
+					<div><input type="checkbox" name="country" value="costa " id="costa"><label for="costa">Costa
+							Rica</label></div>
+					<div><input type="checkbox" name="country" value="romania" id="romania"><label
+							for="romania">Romania</label></div>
+					<div><input type="checkbox" name="country" value="ireland" id="ireland"><label
+							for="ireland">Ireland</label></div>
+					<div><input type="checkbox" name="country" value="chile" id="chile"><label for="chile">Chile</label>
+					</div>
+					<div><input type="checkbox" name="country" value="peru" id="peru"><label for="peru">Peru</label>
+					</div>
+					<div><input type="checkbox" name="country" value="philippine" id="philippine"><label
+							for="philippine">Philippine</label></div>
+					<div><input type="checkbox" name="country" value="saudi" id="saudi"><label for="saudi">Saudi
+							Arabia</label></div>
+					<div><input type="checkbox" name="country" value="caleidonia" id="caleidonia"><label
+							for="caleidonia">New Caleidonia</label></div>
+				</div>
+		</aside>
+	</div>
+
+</body>
+
+<script src="/assets/js/filter.js"></script>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+
+</html>

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+.container10 {
+    font-family: "Ubuntu", sans-serif;
+    text-align: center;
+    margin-top: 8%;
+}
+
+h4 {
+    margin-bottom: 10%;
+}
+
+li {
+   margin-top: 3%;
+}
+
+a i {
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.container11 {
+    font-family: "Ubuntu", sans-serif;
+    margin-top: 2%;
+    padding: 2%;
+}
+
+h2 {
+    margin-bottom: 5%;
+    margin-top: 5%;
+}

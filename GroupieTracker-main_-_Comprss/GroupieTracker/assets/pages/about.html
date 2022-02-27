@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Groupie Tracker</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/style2.css">
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script>
+		$(function () {
+			var array = [];
+
+			var elements = document.body.getElementsByTagName("h4");
+
+			for (var i = 0; i < elements.length; i++) {
+				var current = elements[i];
+				if (current.children.length === 0 && current.textContent.replace(/ |\n/g, '') !== '') {
+					array.push(current.textContent);
+				}
+			}
+			$("#search").autocomplete({
+				source: array
+			});
+		});
+	</script>
+	
+	<script>
+		function ouvrirPage() {
+			var array = [];
+
+			var elements = document.body.getElementsByTagName("h4");
+
+			for (var i = 0; i < elements.length; i++) {
+				var current = elements[i];
+				if (current.children.length === 0 && current.textContent.replace(/ |\n/g, '') !== '') {
+					array.push(current.textContent);
+				}
+			}
+    		var a = document.getElementById("search").value;
+			if(array.includes(a)){
+				console.log(array.indexOf(a))
+				window.open(`/artist/${array.indexOf(a)}`);
+			}
+			
+		}
+	</script>
+		
+</head>
+
+<body>
+
+	<div class="navbar">
+        <nav>
+            <ul class="links">
+                <li><a href="/index.html">Artists</a></li>
+                <li><a href="/assets/pages/about.html">About</a></li>
+            </ul>
+        </nav>
+            <div class="container4">
+                <input type="search" id="search" value="" onchange="ouvrirPage()">
+				<input type="button" id="button" onclick="ouvrirPage()" value="Chercher">
+            </div>
+    </div>
+
+    <div class="container11">
+		<div class="text1">
+			<h2>Groupie Tracker</h2>
+			<p>Groupie Tracker is a website that allows you to track your favorites artists informations, as well as their upcoming concerts !</p>
+			<h2>Objectives</h2>
+			<p>Groupie Trackers consists on receiving a given API and manipulate the data contained in it, in order to create a site, displaying the information.</p>
+		</div>
+	</div>
+	
+</body>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="/assets/css/ArtistDetail.css">
+</head>
+
+<body>
+
+        
+
+    <div class="ImgArtist" >
+        <h1>{{.Name}}</h1>
+        <img src="{{.Image}}" alt="" draggable="false" >
+
+    </div>
+    <div class="card">
+        <h1>Since {{.CreationDate}}</h1>
+        <p class="title"></p>
+        <hr size ="3" color = "black" />
+        <h2>Members :</h2>
+        {{range .Members}}
+        <p>{{.}} </p>
+        {{end}}
+        <hr size ="3" color = "black" />
+        <h2>Concerts :</h2>
+        {{ range $key, $value := .Relation }}
+        {{$space := replace $key "_" " "}}
+        {{$space = replace $space "-" " "}}
+
+        <div class="">
+            <li><b>{{ $space }}<b>:
+                        {{range $value}}
+                        {{$date := replace . "-" "/"}}
+                        {{ $date }}
+                        {{end}}</li>
+
+        </div>
+
+
+        {{ end }}
+
+      <br>
+       <p> <button><a href="/">Go back home</a></button></p>
+    </br>
+    </div>
+
+
+
+</body> 
+
+</html>
